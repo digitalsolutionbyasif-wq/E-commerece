@@ -1,0 +1,400 @@
+{
+  "entities": {
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Authorized administrator or staff role document.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "email": { "type": "string", "maxLength": 200 },
+        "role": { "type": "string", "enum": ["admin", "staff"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role", "createdAt"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Public-safe user profile without PII.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "displayName": { "type": "string", "maxLength": 120 },
+        "role": { "type": "string", "enum": ["customer", "staff", "admin"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "displayName", "role", "createdAt", "updatedAt"]
+    },
+    "UserPrivateInfo": {
+      "title": "UserPrivateInfo",
+      "description": "Isolated PII for a user.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "email": { "type": "string", "maxLength": 200 },
+        "phone": { "type": "string", "maxLength": 40 },
+        "whatsapp": { "type": "string", "maxLength": 40 },
+        "address": { "type": "string", "maxLength": 400 },
+        "city": { "type": "string", "maxLength": 100 },
+        "postalCode": { "type": "string", "maxLength": 20 },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "updatedAt"]
+    },
+    "WishlistItem": {
+      "title": "WishlistItem",
+      "description": "Authenticated user's saved wishlist product.",
+      "type": "object",
+      "properties": {
+        "productId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "productName": { "type": "string", "maxLength": 180 },
+        "category": { "type": "string", "enum": ["electronics", "fashion", "kids-toys", "home-accessories"] },
+        "pricePkr": { "type": "number" },
+        "imageUrl": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["productId", "userId", "productName", "category", "pricePkr", "imageUrl", "createdAt"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Physical e-commerce catalog product.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "name": { "type": "string", "maxLength": 180 },
+        "category": { "type": "string", "enum": ["electronics", "fashion", "kids-toys", "home-accessories"] },
+        "subcategory": { "type": "string", "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 2000 },
+        "pricePkr": { "type": "number" },
+        "discountPricePkr": { "type": "number" },
+        "stock": { "type": "number" },
+        "imageUrl": { "type": "string", "maxLength": 500 },
+        "variants": { "type": "array" },
+        "specs": { "type": "array" },
+        "featured": { "type": "boolean" },
+        "isDemo": { "type": "boolean" },
+        "brand": { "type": "string", "maxLength": 80 },
+        "gender": { "type": "string", "maxLength": 40 },
+        "ageGroup": { "type": "string", "maxLength": 40 },
+        "safetyNote": { "type": "string", "maxLength": 400 },
+        "ratingAvg": { "type": "number" },
+        "reviewCount": { "type": "number" },
+        "seoTitle": { "type": "string", "maxLength": 160 },
+        "seoDescription": { "type": "string", "maxLength": 320 },
+        "ogImageUrl": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "category", "subcategory", "description", "pricePkr", "stock", "imageUrl", "featured", "createdAt", "updatedAt"]
+    },
+    "Course": {
+      "title": "Course",
+      "description": "Online Skills Development Academy course.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "title": { "type": "string", "maxLength": 180 },
+        "track": { "type": "string", "maxLength": 100 },
+        "overview": { "type": "string", "maxLength": 2000 },
+        "outcomes": { "type": "array" },
+        "curriculum": { "type": "array" },
+        "duration": { "type": "string", "maxLength": 80 },
+        "level": { "type": "string", "enum": ["Beginner", "Intermediate", "Advanced"] },
+        "feePkr": { "type": "number" },
+        "instructorName": { "type": "string", "maxLength": 120 },
+        "instructorBio": { "type": "string", "maxLength": 500 },
+        "imageUrl": { "type": "string", "maxLength": 500 },
+        "featured": { "type": "boolean" },
+        "isDemo": { "type": "boolean" },
+        "seoTitle": { "type": "string", "maxLength": 160 },
+        "seoDescription": { "type": "string", "maxLength": 320 },
+        "ogImageUrl": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "track", "overview", "outcomes", "curriculum", "duration", "level", "feePkr", "instructorName", "imageUrl", "featured", "createdAt", "updatedAt"]
+    },
+    "CategorySeo": {
+      "title": "CategorySeo",
+      "description": "Custom Meta Title, Meta Description, OpenGraph image, and keywords for category pages.",
+      "type": "object",
+      "properties": {
+        "slug": { "type": "string", "enum": ["electronics", "fashion", "kids-toys", "home-accessories", "courses", "tuition", "govt-exams", "ability-tests"] },
+        "seoTitle": { "type": "string", "maxLength": 160 },
+        "seoDescription": { "type": "string", "maxLength": 320 },
+        "ogImageUrl": { "type": "string", "maxLength": 500 },
+        "seoKeywords": { "type": "string", "maxLength": 500 },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["slug", "seoTitle", "seoDescription", "ogImageUrl", "updatedAt"]
+    },
+    "McqQuestion": {
+      "title": "McqQuestion",
+      "description": "Practice and mock test MCQ item.",
+      "type": "object",
+      "properties": {
+        "examGroup": { "type": "string", "enum": ["govt", "ability"] },
+        "examCategory": { "type": "string", "maxLength": 100 },
+        "subject": { "type": "string", "maxLength": 100 },
+        "question": { "type": "string", "maxLength": 1000 },
+        "options": { "type": "array" },
+        "correctIndex": { "type": "number" },
+        "explanation": { "type": "string", "maxLength": 1000 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["examGroup", "examCategory", "subject", "question", "options", "correctIndex", "explanation", "createdAt"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer e-commerce order.",
+      "type": "object",
+      "properties": {
+        "orderCode": { "type": "string", "maxLength": 40 },
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "customerName": { "type": "string", "maxLength": 120 },
+        "phone": { "type": "string", "maxLength": 40 },
+        "whatsapp": { "type": "string", "maxLength": 40 },
+        "email": { "type": "string", "maxLength": 200 },
+        "deliveryAddress": { "type": "string", "maxLength": 400 },
+        "city": { "type": "string", "maxLength": 100 },
+        "postalCode": { "type": "string", "maxLength": 20 },
+        "orderNotes": { "type": "string", "maxLength": 500 },
+        "paymentMethod": { "type": "string", "enum": ["Cash on Delivery", "Bank Transfer", "Easypaisa", "JazzCash"] },
+        "paymentReference": { "type": "string", "maxLength": 120 },
+        "items": { "type": "array" },
+        "subtotalPkr": { "type": "number" },
+        "discountPkr": { "type": "number" },
+        "deliveryFeePkr": { "type": "number" },
+        "totalPkr": { "type": "number" },
+        "status": { "type": "string", "enum": ["Pending", "Confirmed", "Processing", "Shipped", "Delivered", "Cancelled"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["orderCode", "userId", "customerName", "phone", "whatsapp", "email", "deliveryAddress", "city", "paymentMethod", "items", "subtotalPkr", "discountPkr", "deliveryFeePkr", "totalPkr", "status", "createdAt", "updatedAt"]
+    },
+    "OrderTracking": {
+      "title": "OrderTracking",
+      "description": "PII-free public order tracking status projection keyed by orderCode.",
+      "type": "object",
+      "properties": {
+        "orderCode": { "type": "string", "maxLength": 40, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "orderId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "city": { "type": "string", "maxLength": 100 },
+        "paymentMethod": { "type": "string", "enum": ["Cash on Delivery", "Bank Transfer", "Easypaisa", "JazzCash"] },
+        "itemCount": { "type": "number" },
+        "itemSummary": { "type": "array" },
+        "totalPkr": { "type": "number" },
+        "status": { "type": "string", "enum": ["Pending", "Confirmed", "Processing", "Shipped", "Delivered", "Cancelled"] },
+        "statusNote": { "type": "string", "maxLength": 240 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["orderCode", "orderId", "userId", "city", "paymentMethod", "itemCount", "itemSummary", "totalPkr", "status", "createdAt", "updatedAt"]
+    },
+    "Enrollment": {
+      "title": "Enrollment",
+      "description": "Student enrollment in an online skills course.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "studentName": { "type": "string", "maxLength": 120 },
+        "email": { "type": "string", "maxLength": 200 },
+        "whatsapp": { "type": "string", "maxLength": 40 },
+        "courseId": { "type": "string", "maxLength": 128 },
+        "courseTitle": { "type": "string", "maxLength": 180 },
+        "educationLevel": { "type": "string", "maxLength": 100 },
+        "learningMode": { "type": "string", "enum": ["Live Online", "Self-Paced Recorded", "Hybrid Mentorship"] },
+        "status": { "type": "string", "enum": ["Pending", "Confirmed", "Completed", "Cancelled"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "studentName", "email", "whatsapp", "courseId", "courseTitle", "educationLevel", "learningMode", "status", "createdAt", "updatedAt"]
+    },
+    "TuitionRequest": {
+      "title": "TuitionRequest",
+      "description": "Home or online tuition consultation and registration.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "studentName": { "type": "string", "maxLength": 120 },
+        "guardianName": { "type": "string", "maxLength": 120 },
+        "contactNumber": { "type": "string", "maxLength": 40 },
+        "whatsapp": { "type": "string", "maxLength": 40 },
+        "className": { "type": "string", "maxLength": 100 },
+        "subject": { "type": "string", "maxLength": 120 },
+        "board": { "type": "string", "maxLength": 100 },
+        "cityArea": { "type": "string", "maxLength": 150 },
+        "tuitionMode": { "type": "string", "enum": ["Home Tuition", "Online Tuition"] },
+        "preferredTiming": { "type": "string", "maxLength": 100 },
+        "assignedTeacher": { "type": "string", "maxLength": 120 },
+        "status": { "type": "string", "enum": ["Pending", "Teacher Assigned", "Active", "Closed"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "studentName", "guardianName", "contactNumber", "whatsapp", "className", "subject", "board", "cityArea", "tuitionMode", "preferredTiming", "status", "createdAt", "updatedAt"]
+    },
+    "TestAttempt": {
+      "title": "TestAttempt",
+      "description": "Student MCQ mock test attempt record.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "examCategory": { "type": "string", "maxLength": 100 },
+        "testTitle": { "type": "string", "maxLength": 150 },
+        "totalQuestions": { "type": "number" },
+        "correctCount": { "type": "number" },
+        "scorePercent": { "type": "number" },
+        "durationSeconds": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "examCategory", "testTitle", "totalQuestions", "correctCount", "scorePercent", "durationSeconds", "createdAt"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "Moderated customer review for a product, course, or platform.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "targetType": { "type": "string", "enum": ["product", "course", "platform"] },
+        "targetId": { "type": "string", "maxLength": 128 },
+        "targetName": { "type": "string", "maxLength": 180 },
+        "authorName": { "type": "string", "maxLength": 120 },
+        "rating": { "type": "number" },
+        "comment": { "type": "string", "maxLength": 1000 },
+        "verifiedPurchase": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected", "hidden"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "targetType", "targetId", "targetName", "authorName", "rating", "comment", "verifiedPurchase", "status", "createdAt", "updatedAt"]
+    },
+    "ContactMessage": {
+      "title": "ContactMessage",
+      "description": "Customer inquiry from the Contact Us page.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "name": { "type": "string", "maxLength": 120 },
+        "email": { "type": "string", "maxLength": 200 },
+        "whatsapp": { "type": "string", "maxLength": 40 },
+        "subject": { "type": "string", "maxLength": 180 },
+        "message": { "type": "string", "maxLength": 2000 },
+        "status": { "type": "string", "enum": ["New", "Replied", "Resolved"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name", "email", "whatsapp", "subject", "message", "status", "createdAt"]
+    },
+    "SiteSettings": {
+      "title": "SiteSettings",
+      "description": "Public storefront and contact settings editable by Admin.",
+      "type": "object",
+      "properties": {
+        "whatsappNumber": { "type": "string", "maxLength": 60 },
+        "businessAddress": { "type": "string", "maxLength": 300 },
+        "businessEmail": { "type": "string", "maxLength": 200 },
+        "businessPhone": { "type": "string", "maxLength": 60 },
+        "heroHeadline": { "type": "string", "maxLength": 200 },
+        "heroSubheadline": { "type": "string", "maxLength": 400 },
+        "promoBannerText": { "type": "string", "maxLength": 240 },
+        "mapLat": { "type": "number" },
+        "mapLng": { "type": "number" },
+        "facebookUrl": { "type": "string", "maxLength": 300 },
+        "instagramUrl": { "type": "string", "maxLength": 300 },
+        "tiktokUrl": { "type": "string", "maxLength": 300 },
+        "youtubeUrl": { "type": "string", "maxLength": 300 },
+        "linkedinUrl": { "type": "string", "maxLength": 300 },
+        "seoTitle": { "type": "string", "maxLength": 160 },
+        "seoDescription": { "type": "string", "maxLength": 320 },
+        "seoKeywords": { "type": "string", "maxLength": 500 },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["whatsappNumber", "businessAddress", "businessEmail", "businessPhone", "heroHeadline", "heroSubheadline", "mapLat", "mapLng", "updatedAt"]
+    },
+    "NewsletterSubscriber": {
+      "title": "NewsletterSubscriber",
+      "description": "Newsletter subscription record.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "maxLength": 200 },
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "status": { "type": "string", "enum": ["subscribed", "unsubscribed"] },
+        "source": { "type": "string", "maxLength": 60 },
+        "subscribedAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "userId", "subscribedAt"]
+    }
+  },
+  "firestore": {
+    "/admins/{adminId}": {
+      "schema": { "$ref": "#/entities/AdminUser" },
+      "description": "Admin and staff roles lookup."
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Public-safe user profile documents."
+    },
+    "/users/{userId}/private/{docId}": {
+      "schema": { "$ref": "#/entities/UserPrivateInfo" },
+      "description": "Private PII documents owned by userId."
+    },
+    "/users/{userId}/wishlist/{productId}": {
+      "schema": { "$ref": "#/entities/WishlistItem" },
+      "description": "Saved wishlist products owned by userId."
+    },
+    "/products/{productId}": {
+      "schema": { "$ref": "#/entities/Product" },
+      "description": "Physical e-commerce catalog."
+    },
+    "/courses/{courseId}": {
+      "schema": { "$ref": "#/entities/Course" },
+      "description": "Online Skills Development Academy courses."
+    },
+    "/mcqQuestions/{questionId}": {
+      "schema": { "$ref": "#/entities/McqQuestion" },
+      "description": "Exam & Aptitude MCQ question bank."
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "Customer purchase orders."
+    },
+    "/orderTracking/{orderCode}": {
+      "schema": { "$ref": "#/entities/OrderTracking" },
+      "description": "PII-free real-time order tracking status keyed by Order ID."
+    },
+    "/enrollments/{enrollmentId}": {
+      "schema": { "$ref": "#/entities/Enrollment" },
+      "description": "Student course enrollments."
+    },
+    "/tuitionRequests/{requestId}": {
+      "schema": { "$ref": "#/entities/TuitionRequest" },
+      "description": "Home & Online tuition consultation requests."
+    },
+    "/testAttempts/{attemptId}": {
+      "schema": { "$ref": "#/entities/TestAttempt" },
+      "description": "Student MCQ mock exam results."
+    },
+    "/reviews/{reviewId}": {
+      "schema": { "$ref": "#/entities/Review" },
+      "description": "Moderated customer reviews."
+    },
+    "/contactMessages/{messageId}": {
+      "schema": { "$ref": "#/entities/ContactMessage" },
+      "description": "Customer contact inquiries."
+    },
+    "/siteSettings/{settingId}": {
+      "schema": { "$ref": "#/entities/SiteSettings" },
+      "description": "Storefront configuration."
+    },
+    "/categorySeo/{slug}": {
+      "schema": { "$ref": "#/entities/CategorySeo" },
+      "description": "Per-category SEO metadata and OpenGraph images."
+    },
+    "/newsletterSubscribers/{subId}": {
+      "schema": { "$ref": "#/entities/NewsletterSubscriber" },
+      "description": "Newsletter subscription records."
+    }
+  }
+}
